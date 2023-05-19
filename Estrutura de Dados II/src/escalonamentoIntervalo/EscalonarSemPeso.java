@@ -17,20 +17,25 @@ public class EscalonarSemPeso {
         intervalos.add(new Intervalo("G", 6, 10));
         intervalos.add(new Intervalo("H", 8, 11));
 
-        intervalos.forEach(System.out::println);
-        System.out.println();
+//        System.out.println("Lista de intervalos:");
+//        intervalos.forEach(System.out::println);
+//        System.out.println();
+        MostrarIntervalos.printIntervalos(intervalos);
 
         // organizar lista pela deadline mais curta (SDF)
+        System.out.println("Lista ordenada:");
         intervalos.sort(Comparator.comparing(Intervalo::getFim));
         intervalos.forEach(System.out::println);
         System.out.println();
 
+        Intervalo ultimo = intervalos.get(0);
+        System.out.print("Intervalos: "+ultimo.getId()+" ");
         // verificar disjunção (não simultaneidade)
-        for (int i=0; i< intervalos.size()-1; i++) {
-            Intervalo iAtual = intervalos.get(i);
-            Intervalo iProximo = intervalos.get(i+1);
-            if (iAtual.getFim() <= iProximo.getInicio()) {
-                System.out.println(iProximo.getId());
+        for (int i=1; i< intervalos.size(); i++) {
+            Intervalo atual = intervalos.get(i);
+            if (ultimo.getFim() <= atual.getInicio()) {
+                System.out.print(atual.getId()+" ");
+                ultimo = atual;
             }
         }
     }
