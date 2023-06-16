@@ -5,7 +5,7 @@ import java.util.Set;
 
 public class EncadeamentoExterno {
     Set<Integer>[] hTable; // usando vetor de sets como hashTable
-    int m;
+    private final int m;
 
     public EncadeamentoExterno(int m) {
         this.m = m;
