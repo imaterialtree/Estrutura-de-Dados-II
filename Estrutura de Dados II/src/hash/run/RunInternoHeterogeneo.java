@@ -6,7 +6,7 @@ import javax.swing.*;
 import java.io.IOException;
 import java.util.Arrays;
 
-public class RunHashTable {
+public class RunInternoHeterogeneo {
     public static void main(String[] args) throws IOException {
 
         int tam = jIntInput("Digite o tamanho da tabela hash", "Encadeamento interno heterogeneo");
@@ -25,8 +25,6 @@ public class RunHashTable {
                     hashTable1.inserir(
                             jIntInput(viewTable+"\nDigite um inteiro positivo para ser inserido", "Inserir"));
 
-                    System.out.print("\033[H\033[2J");
-                    System.out.flush();
                     System.out.println(hashTable1);
                 }
 
@@ -44,7 +42,6 @@ public class RunHashTable {
                 }
             }
         } while (op != SAIR && op != -1);
-//        frame.dispose();
     }
 
     static int jIntInput(String msg, String title) {

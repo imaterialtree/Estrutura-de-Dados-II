@@ -1,15 +1,18 @@
 package grafo;
 
-import java.util.ArrayList;
-import java.util.Objects;
+import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Vertice {
     String id;
+    int cor;
     ArrayList<Aresta> arestaEntrada;
     ArrayList<Aresta> arestaSaida;
 
     public Vertice(String id) {
         this.id = id;
+        cor = -1;
         this.arestaEntrada = new ArrayList<>();
         this.arestaSaida = new ArrayList<>();
     }
@@ -18,12 +21,25 @@ public class Vertice {
     public String getId() {
         return id;
     }
+
+    public int getCor() {
+        return cor;
+    }
+
+    public void setCor(int cor) {
+        this.cor = cor;
+    }
+
     public ArrayList<Aresta> getArestaEntrada() {
         return arestaEntrada;
     }
 
     public ArrayList<Aresta> getArestaSaida() {
         return arestaSaida;
+    }
+    public ArrayList<Aresta> getArestaTodas() {
+        return  (ArrayList<Aresta>) Stream.concat(arestaEntrada.stream(), arestaSaida.stream())
+                .collect(Collectors.toList());
     }
 
     // adds
@@ -44,6 +60,13 @@ public class Vertice {
         Aresta a = new Aresta(peso, new Vertice(inicio), this);
         return arestaSaida.add(a);
     }
+
+    public void addArestaBidirecional (String vizinho) {
+        Aresta aIn = new Aresta(new Vertice(vizinho), this);
+        Aresta aOut = new Aresta(this, new Vertice(vizinho));
+        arestaEntrada.add(aIn);
+        arestaEntrada.add(aOut);
+    }
     //removes
     public boolean removeArestaEntrada(Aresta a) {
         return this.arestaEntrada.remove(a);
@@ -52,13 +75,31 @@ public class Vertice {
         return this.arestaSaida.remove(a);
     }
 
+
     // Get menor aresta
     public int menorDistancia() {
         int menor = Integer.MAX_VALUE;
         for (Aresta a : arestaEntrada) {
-            if (a.peso < menor) menor = a.peso;
+            if (a.getPeso() < menor) menor = a.getPeso();
         }
         return menor;
+    }
+    public Set<Vertice> getVizinhos() {
+        Set<Vertice> vizinhos = new HashSet<>();
+        for (Aresta aresta : arestaSaida) {
+            vizinhos.add(aresta.getFim());
+        }
+        return vizinhos;
+    }
+    public Set<Vertice> getVizinhosBidirecional() {
+        Set<Vertice> vizinhos = new HashSet<>();
+        for (Aresta aresta : arestaSaida) {
+            vizinhos.add(aresta.getFim());
+        }
+        for (Aresta aresta : arestaEntrada) {
+            vizinhos.add(aresta.getInicio());
+        }
+        return vizinhos;
     }
 
     @Override
@@ -67,5 +108,10 @@ public class Vertice {
         if (o == null || getClass() != o.getClass()) return false;
         Vertice vertice = (Vertice) o;
         return id.equals(vertice.id) && Objects.equals(arestaEntrada, vertice.arestaEntrada) && Objects.equals(arestaSaida, vertice.arestaSaida);
+    }
+
+    @Override
+    public String toString() {
+        return id;
     }
 }

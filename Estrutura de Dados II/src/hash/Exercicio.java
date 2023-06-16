@@ -17,11 +17,6 @@ import java.util.Arrays;
 
 public class Exercicio {
     public static void main(String[] args) {
-        InternoHeterogeneo heterogeneo = new InternoHeterogeneo(10, 5);
-        heterogeneo.inserir(5);
-        heterogeneo.inserir(8);
-        heterogeneo.inserir(20);
-        System.out.println(heterogeneo);
-        System.out.println(heterogeneo.buscar(20));
+        System.out.println("\033[32;1moi");
     }
 }

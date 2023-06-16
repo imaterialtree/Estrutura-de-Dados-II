@@ -2,6 +2,7 @@ package hash.colisaoTratamento.encadeado;
 
 import hash.Entrada;
 
+import java.util.Arrays;
 import java.util.LinkedList;
 
 public class EncadeamentoExterno {
@@ -22,6 +23,9 @@ public class EncadeamentoExterno {
     // return false se a chave não existia
     // return true se a chave já existia e atualiza o valor
     public boolean inserir(int key, int value) {
+        if (value<0) {
+            return false;
+        }
         int indice = hash(value);
         LinkedList<Entrada> lista = hTable[indice];
         for (Entrada e : lista) {
@@ -34,7 +38,7 @@ public class EncadeamentoExterno {
         return true;
     }
 
-    public Object buscar(int key) {
+    public int buscar(int key) {
         int indice = hash(key);
         LinkedList<Entrada> lista = hTable[indice];
 
@@ -44,7 +48,7 @@ public class EncadeamentoExterno {
             }
         }
 
-        return null;
+        return -1;
     }
 
     // return false se não encontrar
@@ -61,4 +65,12 @@ public class EncadeamentoExterno {
         return false;
     }
 
+    @Override
+    public String toString() {
+        StringBuilder view = new StringBuilder();
+        for (int i = 0; i < hTable.length; i++) {
+            view.append(String.format("[%d]-> %s\n", i, hTable[i].toString()));
+        }
+        return view.toString();
+    }
 }

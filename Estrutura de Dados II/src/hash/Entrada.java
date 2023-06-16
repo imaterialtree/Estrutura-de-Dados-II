@@ -20,4 +20,9 @@ public class Entrada {
     public void setValue(int value) {
         this.value = value;
     }
+
+    @Override
+    public String toString() {
+        return String.format("{%d: %d}", key, value);
+    }
 }
