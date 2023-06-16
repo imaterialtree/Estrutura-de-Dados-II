@@ -56,8 +56,6 @@ public class Grafo {
         this.arestas.add(aresta1);
         this.arestas.add(aresta2);
     }
-
-
     public int[][] gerarMatrizAdjacencia()
     {
         int[][] matriz =  new int[vertices.size()][vertices.size()];
