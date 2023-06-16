@@ -3,11 +3,10 @@ package hash.run;
 import hash.colisaoTratamento.encadeado.InternoHeterogeneo;
 
 import javax.swing.*;
-import java.awt.*;
 import java.io.IOException;
 import java.util.Arrays;
 
-public class RunInternoHeterogeneo {
+public class RunHashTable {
     public static void main(String[] args) throws IOException {
 
         int tam = jIntInput("Digite o tamanho da tabela hash", "Encadeamento interno heterogeneo");

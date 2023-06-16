@@ -1,39 +1,64 @@
 package hash.colisaoTratamento.encadeado;
 
-import java.util.HashSet;
-import java.util.Set;
+import hash.Entrada;
+
+import java.util.LinkedList;
 
 public class EncadeamentoExterno {
-    Set<Integer>[] hTable; // usando vetor de sets como hashTable
-    private final int m;
+    LinkedList<Entrada>[] hTable; // usando vetor de sets como hashTable
+    private final int TAMANHO;
 
-    public EncadeamentoExterno(int m) {
-        this.m = m;
-        hTable = new Set[m];
-        for (int i=0; i<m; i++) {
-            hTable[i] = null;
+    public EncadeamentoExterno(int TAMANHO) {
+        this.TAMANHO = TAMANHO;
+        hTable = new LinkedList[TAMANHO];
+        for (int i = 0; i< TAMANHO; i++) {
+            hTable[i] = new LinkedList<>();
         }
     }
     int hash(int value) {
-        return value % m;
-    }
-    public boolean adicionar(int key) {
-        if (hTable[hash(key)]==null) {
-            hTable[hash(key)] = new HashSet<>();
-        }
-        return hTable[hash(key)].add(key);
+        return value % TAMANHO;
     }
 
-    public boolean busca(int key) {
-        if (hTable[hash(key)]!=null) {
-            return hTable[hash(key)].contains(key);
+    // return false se a chave não existia
+    // return true se a chave já existia e atualiza o valor
+    public boolean inserir(int key, int value) {
+        int indice = hash(value);
+        LinkedList<Entrada> lista = hTable[indice];
+        for (Entrada e : lista) {
+            if (e.getKey()==(key)) {
+                e.setValue(value);
+                return true;
+            }
         }
-        return false;
+        lista.add(new Entrada(key, value));
+        return true;
     }
+
+    public Object buscar(int key) {
+        int indice = hash(key);
+        LinkedList<Entrada> lista = hTable[indice];
+
+        for (Entrada e : lista) {
+            if (e.getKey()==(key)) {
+                return e.getValue();
+            }
+        }
+
+        return null;
+    }
+
+    // return false se não encontrar
+    // return true se remover com sucesso
     public boolean remover(int key) {
-        if (hTable[hash(key)]!=null) {
-            return hTable[hash(key)].remove(key);
+        int indice = hash(key);
+        LinkedList<Entrada> lista = hTable[indice];
+
+        for (Entrada e : lista) {
+            if (e.getKey()==(key)) {
+                return lista.remove(e);
+            }
         }
         return false;
     }
+
 }

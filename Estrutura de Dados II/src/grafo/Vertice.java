@@ -4,19 +4,19 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 public class Vertice {
-    String dado;
+    String id;
     ArrayList<Aresta> arestaEntrada;
     ArrayList<Aresta> arestaSaida;
 
-    public Vertice(String dado) {
-        this.dado = dado;
+    public Vertice(String id) {
+        this.id = id;
         this.arestaEntrada = new ArrayList<>();
         this.arestaSaida = new ArrayList<>();
     }
 
     // Getters
-    public String getDado() {
-        return dado;
+    public String getId() {
+        return id;
     }
     public ArrayList<Aresta> getArestaEntrada() {
         return arestaEntrada;
@@ -66,6 +66,6 @@ public class Vertice {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Vertice vertice = (Vertice) o;
-        return dado.equals(vertice.dado) && Objects.equals(arestaEntrada, vertice.arestaEntrada) && Objects.equals(arestaSaida, vertice.arestaSaida);
+        return id.equals(vertice.id) && Objects.equals(arestaEntrada, vertice.arestaEntrada) && Objects.equals(arestaSaida, vertice.arestaSaida);
     }
 }
