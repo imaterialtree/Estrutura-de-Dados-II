@@ -25,10 +25,10 @@ public class RunBellmanDijkstra {
 
         System.out.println("Busca em Largura: ");
         Busca.buscaEmLargura(grafo);
-        System.out.println("\n\n");
+        System.out.println("\n");
         System.out.println("Matriz em Adjacencia");
         grafo.gerarMatrizAdjacencia();
-        System.out.println("\n\n");
+        System.out.println("\n");
 
         System.out.println("Busca em profundidade");
         Busca.buscaEmProfundidade(grafo);
